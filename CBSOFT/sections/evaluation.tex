@@ -1,0 +1,120 @@
+To reassure the conclusions presented in the previous section, and to provide a more general analysis, we ran new studies considering a different object, TCOM. TCOM is an industrial software also developed in the context of our cooperation with the Ingenico Brasil Ltda that controls the execution and manages testing results of a series of hardware parts. It is important to highlight that a different team ran this project, but they used a similar environment:  CLARET use cases for specification and generated MBT suites. The team also reported similar problems concerning volatile requirements, and frequent test case discards.
+
+In the first study, similar to the procedure applied in Section \ref{sec:procedure}, we mined TCOM's repository and collected all versions of its use case documents and their edits. Table \ref{tab:useCasesEvaluation} summarizes the collected data from TCOM. Then, we manually classified all edits between low and high impact to serve as validation for the automatic classification. Finally, we run all distance functions considering the optimal \textit{impact thresholds} (Table \ref{tab:bestval} - second column) and calculated Precision, Recall and Accuracy for each configuration (Table \ref{tab:bestvalEvaluation}).
+
+\begin{table}[]
+\centering
+\caption{Summary of the artifacts for the TCOM system.}
+\label{tab:useCasesEvaluation}
+\begin{tabular}{|l|l|l|l|}
+\hline
+     & \#Use Cases & \#Versions &\#Edits \\ \hline
+TCOM &     7      &      32    &     133         \\  \hline
+\end{tabular}
+\end{table}
+
+
+
+\begin{table}[h]
+\caption{TCom - Evaluating the use of the found impact threshold for each function and respective precision, recall and accuracy values.}
+\begin{tabular}{lcccc}
+\multicolumn{1}{c}{\textbf{Function}} & \textbf{\begin{tabular}[c]{@{}c@{}}Impact \\ Threshold\end{tabular}} & \textbf{Precision} & \textbf{Recall} & \textbf{Accuracy} \\
+Hamming                               & 0.91                                                                 & 87.59\%            & 94\%         & 84.96\%           \\
+Levenshtein                           & 0.59                                                                 & 87.85\%            & 94\%         & 85.71\%           \\
+OSA                                   & 0.59                                                                 & 87.85\%            & 94\%         & 85.71\%           \\
+Jaro                                  & 0.28                                                                 & 89.52\%            & 94.00\%         & 87.22\%           \\
+Jaro-Winkler                          & 0.25                                                                 & 94.00\%            & 89.52\%         & 87.22\%           \\
+LCS                                   & 0.55                                                                 & 89.62\%            & 95\%         & 87.97\%           \\
+Jaccard                               & 0.33                                                                 & 89.52\%            & 94\%         & 87.22\%           \\
+NGram                                 & 0.58                                                                 & 87.85\%            & 94\%         & 85.71\%           \\
+Cosine                                & 0.13                                                                 & 88.68\%               & 94\%            & 86.47\%           \\
+Sørensen–Dice                         & 0.47                                                                 & 88.68\%            & 94\%         & 86.47\%          
+\end{tabular}
+\label{tab:bestvalEvaluation}
+\end{table}
+
+As we can see, the found impact thresholds presented high precision, recall, and accuracy values when used in a different system and context (all above 84\%). This result gives as evidence that, distance functions are effective for automatic classification of edits (RQ1) and that the found impact thresholds performed well for a different experimental object (RQ2).
+
+In a second moment, we 
+%Believing that the automatic classification is efficient, we 
+run a case study to evaluate how our approach (using distance functions for automatic classification) can help reducing test discards. For that, we also used TCOM's CLARET artifacts, and we defined the following research question:
+\begin{itemize}
+\item RQ3: Can distance function be used for reducing the discard of MBT tests? 
+\end{itemize}
+
+To answer RQ3, we considered TCOM's MBT test cases generated from its CLARET files. Since all distance functions behave similarly (Section \ref{sec:res}), in this case study we used only Levenshtein's function to automatically classify the edits and to check the impact of those edits in the tests. In a common scenario, which we want to avoid, any test case that contains an updated step would be discarded. Therefore, in the context of our study, we used the following strategy \textit{``only test cases that contain high impact edits should be discarded, while test cases with low impact edits are likely to be reused with no or little updating''}. The rationale behind this decision is that low impact edits often imply on little to no changes to the system behavior. Considering system level black-box test suites (as the ones from the projects used in our study), those tests should be easily reused. We used this strategy and we first applied Oliveira's et al.'s  classification \cite{de2016full} that divided TCOM's tests among three sets:  \textit{obsolete} -- test cases that include impacted steps; \textit{reusable} -- test cases that were not impacted by the edits; and \textit{new} -- test cases that include new steps. 
+
+A total of 1477 MBT test cases were collected from TCOM's, where 333 were found \textit{new} (23\%), 724 \textit{obsolete} (49\%), and 420 \textit{reusable} (28\%). This data reinforces Silva et al.'s \cite{Silva:2018:SIM:3266003.3266009} 
+conclusions showing that, in an agile context, most of an MBT test suite became obsolete quite fast. 
+
+In a common scenario, all ``obsolete'' test cases (49\%) would be discarded throughout the development cycles. To cope with this problem, we ran our automatic analysis and we reclassify the 724 obsolete test cases among \textit{low impacted} -- test cases that include unchanged steps and updated steps classified by our strategy as "low impact"; \textit{highly impacted} -- test cases that include unchanged steps and ``high impact'' steps; and \textit{mixed}, test cases that include at least one ``high impact'' step and at least one ``low impact'' step. From this analysis, 109 test cases were \textit{low impacted}. Although this number seems low (15\%), those test cases would be wrongly discarded when in fact they could be easily turned into reusable. For instance, Table \ref{tab:li_tc} shows a simplified version of a ``low impacted'' test case from TCOM. As we can see, only step 2 was updated to better phrase a system response. This was  an update for improving specification readability, but it does not impact on the system's behavior.
+
+\begin{table}[]
+\caption{Example of a low impacted test case.}
+\begin{tabular}{|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}...\\ step 1: operator 
+presses \\the terminal approving \\button.\\
+step 2: system goes \\back to the terminal\\ profiling screen.\\ ...\end{tabular} & \begin{tabular}[c]{@{}l@{}}...\\ step 1: operator 
+presses \\the terminal approving \\button.\\
+step 2: system redirects \\the terminal to its\\ profiling screen.\\ ...\end{tabular} \\ \hline
+\end{tabular}
+\label{tab:li_tc}
+\end{table}
+
+The remaining test cases were classified as follows: 196 ``highly impacted'' (27\%), and 419 ``mixed'' (58\%). Table \ref{tab:hi_tc} and \ref{tab:hi_mx} show examples of highly impacted and mixed tests, respectively. In Table \ref{tab:hi_tc}, we can see that steps 3, 4, and 9 were drastically changed, which infer to a test case that requires much effort to turn it into reusable. On the other hand, the test in Table \ref{tab:hi_mx}, we have both an edit for fixing a typo (step 2) and an edit with a requirement change (step 7). 
+
+\begin{table}[]
+\caption{Example of a highly impacted test case.}
+\begin{tabular}{|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}...\\ step 3: operator presses\\  camera icon. \\ step 4: system redirects\\  to photo capture screen.\\ ...\\ step 9: operator takes a\\  picture and presses \\ the Back button.\\ ...\end{tabular} & \begin{tabular}[c]{@{}l@{}}...\\ step 3: operator selects\\ a testing plan.\\ step 4: system redirects \\ to the screen that shows\\  the selected tests.\\ ...\\ step 9: operator sets a \\ score and press Ok.\\ ...\end{tabular} \\ \hline
+\end{tabular}
+\label{tab:hi_tc}
+\end{table}
+
+
+\begin{table}[]
+\caption{Example of a mixed test case.}
+\begin{tabular}{|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}...\\ step 2: operator presses \\ button CANCEL to mark\\ there is no occurrence \\ description.\\ ...\\ step 7: operator presses \\ the button SEND.\\ ...\end{tabular} & \begin{tabular}[c]{@{}l@{}}...\\ step 2: operator presses \\the button CANCEL to\\
+mark there is no \\occurrence description.\\ ...\\ step 7: operator takes a \\ picture of the hardware.\\ ...\end{tabular} \\ \hline
+\end{tabular}
+\label{tab:hi_mx}
+\end{table}
+
+To check whether our classification was in fact effective we present its confusion matrix (Table \ref{tab:conf_mat}). In general, our classification was 66\% effective (Precision). A smaller precision was in fact already expected, when compared to the precision classification from Section \ref{sec:es}, since here we consider all edits that might affect a test case, while in Section \ref{sec:es} we analyzed and classified each edit individually. However, we can see, our classification was highly effective for \textit{low} and \textit{highly impacted} test cases, and most mistaken classification was relate to the \textit{mixed} one (test that combine low and high impact edits). Those were, in fact, test cases that were affected in a great deal by different types of use case editions.
+
+\begin{table}[]
+\caption{Confusion Matrix.}
+\begin{tabular}{c|c|c|c|c}
+%\hline
+                                                       & \multicolumn{4}{c}{Predicted} \\ %\hline
+                                                       & Low   & High   & Mixed  &      \\ \hline
+\begin{tabular}[c]{@{}c@{}}Actual\\ Low\end{tabular}   & 69    & 4      & 21     & 94   \\ \hline
+\begin{tabular}[c]{@{}c@{}}Actual\\ High\end{tabular}  & 3     & 37     & 27     & 67   \\ \hline
+\begin{tabular}[c]{@{}c@{}}Actual\\ Mixed\end{tabular} & 37    & 155    & 371    & 563  \\ \hline
+                                                       & 109   & 196    & 419    & 724  \\% \hline
+\end{tabular}
+\label{tab:conf_mat}
+\end{table}
+
+Back to our strategy, we believe that only \textit{highly impacted} test cases indicate test cases likely to be discarded since they refer to test cases that would require much effort to be updated. Therefore, 15\% of the first ``obsolete'' set would be reclassified as reusable. Moreover, we believe this rate can get higher when we analyze the \textit{mixed} tests. A mixed test combines low and high impact edits. However, when we manually analyzed those cases, we found several examples where, although \textit{high impact} edits were found, most test case impacts were related to \textit{low impact} edits. For instance, there was a test case composed of 104 execution steps where only one of those steps needed revision due to a \textit{high impact} use case edit, while the number of \textit{low impact} edits was seven. In a practical scenario, although we still classify it as a mixed test case, we would say the impact of the edits was still quite small, which may indicate a manageable revision effort. Thus, we state that mixed tests need better analysis before discarding. The same approach may also work for \textit{highly impacted} tests when related to a low number of edits.
+
+Finally, we can answer RQ3 by saying that an automatic classification using distance functions can, in fact, reduce the number of discarded test cases by at least 15\%. However, this rate tent to be higher when we consider \textit{mixed} tests.
+\\
+\\
+\noindent
+\vspace{2mm} %5mm vertical space
+\fbox{\begin{minipage}{26em}
+\textbf{RQ3: Can distance function be used for reducing the discard of MBT tests?}
+The use of distance functions can reduce the number of discarded test cases by at least 15\%.
+\end{minipage}}
+
+
+
+
+
+
+

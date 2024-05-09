@@ -1,0 +1,189 @@
+\documentclass{sbc2019}%
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+%\usepackage[brazil]{babel}
+\usepackage[misc,geometry]{ifsym} 
+\usepackage{fontspec}
+\usepackage{fontawesome}
+\usepackage{academicons}
+\usepackage{color}
+\usepackage{hyperref} 
+\usepackage{aas_macros}
+\usepackage[bottom]{footmisc}
+\usepackage{listings}
+%\input{macros.tex}
+\usepackage{color}
+\usepackage{amsmath}
+
+\lstdefinestyle{mystyle}{
+	basicstyle=\scriptsize\ttfamily,
+	numberstyle=\tiny\itshape,
+	frame=single,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	xleftmargin=2.6em,
+	framexleftmargin=2em,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+\lstdefinelanguage{claret} {
+	morekeywords={systemName, system, usecase, actor, version, preCondition, postCondition, basic, step, alternative, exception, af, ef, bs, user, type, date},
+	sensitive=false,
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]"
+}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\definecolor{orcidlogo}{rgb}{0.37,0.48,0.13}
+\definecolor{unilogo}{rgb}{0.16, 0.26, 0.58}
+\definecolor{maillogo}{rgb}{0.58, 0.16, 0.26}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.0}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+%\hypersetup{colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue}
+
+%%%%%%% IMPORTANT: We disable hyperlinks by default with this line, to avoid the error "\pdfendlink ended up in different nesting level" while writing.
+%\hypersetup{draft}
+
+\jid{JSERD}
+\jtitle{Journal of Software Engineering Research and Development, 2019, 6:1, }
+\doi{10.5753/jserd.2019.xxx}
+\copyrightstatement{This work is licensed under a Creative Commons Attribution 4.0 International License.}
+\jyear{2019}
+
+
+
+\title{Reducing the Discard of MBT Test Cases}
+
+%% Please note that the command \and is not supported in \author.
+\author[Diniz et al. 2020]{
+\affil{\textbf{Thomaz Diniz}~~[~\textbf{Federal University of Campina Grande~}|\href{mailto:thomaz.morais@ccc.ufcg.edu.br}{~\textbf{\textit{thomaz.morais@ccc.ufcg.edu.br}}} ]}
+
+%\affil{\href{https://orcid.org/0000-0002-0339-6624}{\textcolor{orcidlogo}{\aiOrcid}}~\textbf{José Viterbo}~~\textcolor{unilogo}{\faUniversity}~\textbf{Universidade Federal Fluminense~~}\href{mailto:viterbo@ic.uff.br}{\textcolor{maillogo}{\faEnvelope}}~\textbf{\textit{viterbo@ic.uff.br}}}
+
+\affil{\textbf{Everton L. G. Alves}~~[~\textbf{Federal University of Campina Grande~}|\href{mailto:everton@computacao.ufcg.edu.br}{~\textbf{\textit{everton@computacao.ufcg.edu.br}}} ]}
+
+%\affil{\href{https://orcid.org/0000-0002-7110-2026}{\textcolor{orcidlogo}{\aiOrcid}}~\textbf{Clodis Boscarioli}~~\textcolor{unilogo}{\faUniversity}~\textbf{Universidade Estadual do Oeste do Paraná~~}\href{mailto:clodis.boscarioli@unioeste}{\textcolor{maillogo}{\faEnvelope}}~\textbf{\textit{clodis.boscarioli@unioeste.br}}}
+
+\affil{\textbf{Anderson G.F. Silva}~~[~\textbf{Federal University of Campina Grande~}|\href{mailto:andersongfs@splab.ufcg.edu.br}{~\textbf{\textit{andersongfs@splab.ufcg.edu.br}}} ]}
+
+%\affil{\href{https://orcid.org/0000-0003-3052-3016}{\textcolor{orcidlogo}{\aiOrcid}}~\textbf{Roberto Pereira}~~\textcolor{unilogo}{\faUniversity}~\textbf{Universidade Federal do Paraná~~}\href{mailto:robertop.ihc@gmail.com}{\textcolor{maillogo}{\faEnvelope}}~\textbf{\textit{robertop.ihc@gmail.com}}}
+
+\affil{\textbf{Wilkerson L. Andrade}~~[~\textbf{Federal University of Campina Grande~}|\href{mailto:wilkerson@computacao.ufcg.edu.br}{~\textbf{\textit{wilkerson@computacao.ufcg.edu.br}}} ]}
+
+%\affil{\href{https://orcid.org/0000-0002-2431-8457}{\textcolor{orcidlogo}{\aiOrcid}}~\textbf{Cristiano Maciel}~~\textcolor{unilogo}{\faUniversity}~\textbf{Universidade Federal de Mato Grosso~~}\href{mailto:cmaciel@ufmt.br}{\textcolor{maillogo}{\faEnvelope}}~\textbf{\textit{cmaciel@ufmt.br}}}
+}
+
+%%%%%%% You may comment or delete the line above to make hyperlinks in your paper active. If you then encounter a strange "\pdfendlink ended up in different nesting level than \pdfstartlink", don't worry! Uncomment the line again, and see https://www.overleaf.com/help/246 for further information.
+
+\begin{document}
+
+\begin{frontmatter}
+\maketitle
+
+\begin{abstract}
+\textbf{Abstract}
+
+Model-Based Testing (MBT) is used for generating test suites from system models. However, as software evolves, its models tend to be updated, which may lead to obsolete test cases that are often discarded. Test case discard can be very costly since essential data, such as execution history, are lost. In this paper, we investigate the use of distance functions and machine learning to help to reduce the discard of MBT tests. First, we assess the problem of managing MBT suites in the context of agile industrial projects. Then, we propose two strategies to cope with this problem: (i) a pure distance function-based. An empirical study using industrial data and ten different distance functions showed that distance functions could be effective for identifying low impact edits that lead to test cases that can be updated with little effort. %We also found the optimal configuration for each function.
+Moreover, we showed that, by using this strategy, one could reduce the discard of test cases by 9.53\%; (ii) a strategy that combines machine learning with distance values. %This strategy can classify the impact of edits in use case documents with accuracy above 80\%, it was able to reduce the discard of test cases by 10.4\%, and to correctly identify test cases that should in fact be discarded. 
+This strategy can classify the impact of edits in use case documents with accuracy above 80\%; it was able to reduce the discard of test cases by 10.4\% and to identify test cases that should, in fact, be discarded.
+ 
+\end{abstract}
+
+\begin{keywords}
+MBT, Test Case Discard, Suite evolution, Agile Development
+\end{keywords}
+
+%\begin{license}
+%Published under the Creative Commons Attribution 4.0 International Public License (CC BY 4.0)
+%\end{license}
+
+
+
+\end{frontmatter}
+
+
+\section{Introduction}
+\label{sec:intro}
+\input{sections/introduction}
+
+\section{Motivational Example} \label{sec:motiv}
+\input{sections/motivExample}
+
+\section{Background}
+\label{sec:background}
+\input{sections/background}
+
+\section{Analysing the Impact of Model Evolution in MBT Suites}\label{sec:emp}
+\input{sections/empStudy0}
+
+\section{Distance Functions to Predict the Impact of Test Case Evolution}\label{sec:es}
+\input{sections/empStudy}
+\
+\section{Case Study}
+\label{sec:case}
+\input{LaTeX/sections/evaluation}
+
+\section{Combining Machine learning and Distance Values}
+\label{sec:ml}
+\input{sections/machine}
+
+\section{General Discussion}
+\label{sec:gd}
+\input{sections/generalDisc}
+
+\section{Threats to Validity}
+\label{sec:threats}
+\input{sections/threats}
+
+\section{Related Work}
+\label{sec:related}
+\input{sections/relatedWork}
+
+\section{Concluding Remarks}
+\label{sec:conclud}
+\input{sections/conclusion}
+
+
+\begin{acknowledgements}
+This research was partially supported by a cooperation between
+UFCG and two companies Viceri Solution LTDA
+and Ingenico do Brasil LTDA, the latter stimulated by the
+Brazilian Informatics Law n. 8.248, 1991. Second and fourth authors are supported by National Council for Scientific and Technological Development
+(CNPq)/Brazil (processes 429250/2018-5 and 315057/2018-1). First and third authors were supported by UFCG/CNPq and CAPES, respectively.
+\end{acknowledgements}
+
+
+\bibliographystyle{pasa-mnras}
+\bibliography{references}
+
+\end{document}

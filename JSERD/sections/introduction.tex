@@ -1,0 +1,41 @@
+Software testing plays an important role since it helps gain confidence the software works as expected \citep{Pressman:2007}. Moreover, testing is fundamental for reducing risks and assessing software quality \citep{Pressman:2007}. On the other hand, testing activities are known to be complex and costly. Studies found that nearly 50\% of a project's budget is related to testing \citep{kumar2016impacts}. 
+
+In practice, a test suite can combine manually and automatically executed test cases \citep{manualtesting:2009:Itkonen}. Although automation is always desired, manually executed test cases are still very important. \citet{manualtesting:2009:Itkonen} state that manual testing still plays an important role in the software industry and cannot be fully replaced by automatic testing. For instance, a tester that runs manual tests tends to better exercise a GUI and find new faults. On the other hand, manual testing is often costly \citep{harrold2000testing}.
+
+To reduce the costs related to testing, Model-Based Testing (MBT) can be used. It is a strategy where test suites are automatically generated from specification models (e.g., use cases, UML diagrams) \citep{dalal:mbt:1999,Utting:2006:PMT:1200168}. By using MBT, sound tests can be extracted before any coding, and without much effort.
+
+
+In agile projects, requirements are often volatile \citep{beck2000extremeprogramming,sutherland2014scrum}. In this scenario, test suites are used as safety nets for avoiding feature regression. Discussions on the importance of test case reuse are not new \citep{von1994domain}. In software engineering, software reuse is key for reducing development costs and improving quality. This is also valid for testing \citep{frakes1994systematic}. A test case that finds faults can be a valuable investment \citep{myers2011art}. Good test cases should be stored as a reusable resource to be used in the future \citep{cai2009test}. In this context, an always updated test suite is mandatory. A recent work proposed lightweight specification artifacts for enabling the use of MBT in agile projects \citep{dalton2018mbtagile}, CLARET. With CLARET, one can both specify requirements using use cases and generate MBT suites from them.
+
+
+However, a different problem has emerged. As the software evolves (e.g., bug fixes, change requirements, refactorings), both its models and test suite need revisions. Since MBT test suites are generated from requirement models, in practice, as requirements change, the requirement artifacts are updated, new test suites are generated, and the newer suites replace the old ones. Therefore, test cases that were impacted by the edits, instead of updated, are often considered obsolete and discarded \citep{de2016full}. 
+
+
+Although one may find it easy to generate new suites, regression testing is based on a stable test suite that evolves. Test case discarding implies important historical data that are lost (e.g., execution time, the link faults-to-tests, fault-discovering time). Test case historical data is an important tool for assessing system weaknesses and better manage it, therefore, one should not neglect it. For instance, most defect prediction models are based on historical data \citep{he2012investigation}. Moreover, for some strategies that optimize testing resources allocation, historical data is key \citep{noor2015similarity,anderson2014improving}. By discarding test cases, and their historical data, a project may miss important information for both improving a project and guiding its future actions. Moreover, in a scenario where previously detected faults guide development, missing tests can be a huge loss. Finally, test case discard and poor testing are known as signs of bad management and eventually lead to software development
+waste \citep{sedano2017software}.
+
+
+However, part of a test suite may turn obsolete due to little impacted model updates. Thus, those test cases could be easily reused with little effort and consequently reducing testing discards. Nevertheless, manual analysis is tedious, costly, and time-consuming, which often prevents its applicability in the agile context. In this sense, there is a need for an automatic way of detecting reusable and, in fact, obsolete test cases. 
+
+%Silva et al. \cite{Silva:2018:SIM:3266003.3266009} ran a study with MBT test suites which found that 86\% of the test cases turn obsolete between two consecutive versions of a requirement file, and therefore are discarded. An obsolete test case is a test that includes at least one step that differs from the updated version of the specification document. 
+
+Distance functions map a pair of strings to a number that indicates the similarity level between the two versions \citep{cohen2003distance}. In a scenario where manual test cases evolve due to requirement changes, distance functions can be an interesting tool to help us classify the impact of the changes into a test case.
+
+In this paper, first, we assess and discuss the practical problem of model evolution in MBT suites. To cope with this problem, we propose and evaluate two strategies for automatically classifying model edits and tests aiming at avoiding unnecessary test discards. The first is based on distance functions, while the second combines machine learning and distance values.
+
+This work is an extension over our previous one \citep{diniz2019reducing} including the following contributions:
+\begin{itemize}
+\item An study using historical data from real industrial projects that investigates the impact of model evolution in MBT suites. We found that 86\% of the test cases turn obsolete between two consecutive versions of a requirement file, and those tests are often discarded. Moreover, 52\% of the found obsolete tests
+were caused by \textit{low impact} syntactic edits and could become fully updated with the revision of 25\% of the steps.
+\item An automatic strategy based on distance functions for reclassifying reusable test cases from the obsolete set. 
+%Empirical studies with industrial data found
+% This strategy was evaluated with a series of empirical studies that measured its efficiency using industrial data. We found that all distance functions perform well on classifying \textit{low impacted }model edits  (precision above 94\%). Moreover, we found the optimal configuration for using each function. Finally, 
+This strategy was able to reduce test case discard by  9.53\%.
+\item An automatic strategy based on machine learning and distance functions %results
+for classifying test cases and model change impact. This strategy can classify the impact of edits in use case documents with accuracy above 80\%, it was able to reduce the discard of test cases by 10.4\%, and to identify test cases that should, in fact, be discarded.
+\end{itemize}
+
+
+%We mined the evolution of two projects that use MBT suites, and we use ten distance functions to classify edits between \textit{low impact} (e.g., rewording, typo fixing) --require little test case updating-- and \textit{high impact} (specification and functionality changes) --require much test updating. Our results have found that all ten functions perform well on classifying edit impact. Moreover, we found the optimal configuration for using each function. Finally, we ran a case study in which our strategy was able to reduce the test case discard by at least 15\%.
+
+This paper is organized as follows. In Section \ref{sec:motiv}, we present a motivational example. The needed background is discussed in Section \ref{sec:background}. Section \ref{sec:emp} presents an empirical investigation for assessing the challenges of managing MBT suite during software evolution. Sections \ref{sec:es} and \ref{sec:case} present the strategy for classifying model edits using distance functions and the performed evaluation, respectively. Section \ref{sec:ml} introduces the strategy that combines machine learning and distance values. Section \ref{sec:gd} presents a discussion comparing results from both strategies. In Section \ref{sec:threats}, some threats to validity are cleared. Finally, Sections \ref{sec:related} and \ref{sec:conclud} present related works and the concluding remarks.

@@ -1,0 +1,17 @@
+Güldali and Mlynarski \cite{katara2006making} discuss how MBT can support agile development. For that, they emphasize the need for automation aiming that MBT artifacts can be manageable and with little effort to apply. 
+
+Silva et al. \cite{Silva:2018:SIM:3266003.3266009} gave the first steps on investigating issues related to MBT in the context of agile development. They ran an empirical study on the evolution of specification models and their impact on generated MBT suites and found that 86\% of a test suite is often impacted, however, more than half those tests were impacted due to syntactic model edits (low impact). Those findings greatly motivated this current research. Based on them, here we propose the use of distance functions for automatically classify the test cases that are little impacted and could be reused.
+
+Oliveira Neto et al. \cite{de2016full} discuss a series of problems related to keeping MBT suites updated during software evolution. To cope with this problem, they propose a test selection approach that uses test case similarity as input when collecting test cases that focus on recently applied changes. Oliveira Neto et al.'s approach refer as obsolete all test cases that are impacted in any way by an edit in the requirement model. However, as our study found, a great part of those tests can be little impacted, and could be easily reused, avoiding the discard of testing artifacts. 
+
+The test case discard problem is not restricted to CLARET artifacts. Other similar cases are discussed in the literature (e.g.,\cite{de2016full,nogueira2007model}). Moreover, this problem is even greater with MBT test cases derived from artifacts that use non-controlled language \cite{pinto2012understanding}.
+
+Other works also deal with test case evolution (e.g.,\cite{mirzaaghaei2011automatic,pinto2012understanding}). They discuss the problem and/or propose strategies for updating the testing code. Those strategies do not apply to our context, since we work with MBT test suite evolution generated from use case models. 
+
+
+The use of distance functions in the context of software engineering is not new. Several works have used distance functions in different scenarios (e.g., \cite{runkler2000automatic,okuda1976method,lubis2018combination}). For instance, Runkler and Bezdek \cite{runkler2000automatic} use the Levenshtein function for automatically extract keywords from documents. In the context of MBT, Coutinho et al. \cite{coutinho2016analysis} investigated the effectiveness of a series of distance functions when used combined with strategies for suite reduction based on similarity. Although in a different context, their results go according to ours where all distance functions performed in a similar way.
+
+
+
+
+

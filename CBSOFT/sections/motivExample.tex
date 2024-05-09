@@ -1,0 +1,35 @@
+Suppose that Ann works in a project and wants to benefit from MBT suites. Her project follow an agile methodology where requirements updates are expected to be frequent. Therefore, she decides to use Jorge et al.'s approach \cite{dalton2018mbtagile} (CLARET) for specifying requirements and generating test suites. 
+
+The following requirement was specified using the CLARET's DSL (Listing 1): ``{\it In order to access her email inbox, the user must be registered in the system and provide a correct username and password. In case of incorrect username or password, the system must display an error message and ask for new data.}''. In CLARET, an \textit{\textbf{ef [flow \#]}} mark refers to a possible exception flow, and a \textbf{\textit{bs [step \#]}} mark indicates a returning point from an exception/alternative to the use case's basic flow.
+
+\lstset{style=mystyle, language=claret}
+ \begin{lstlisting}[float=b,caption=Use Case specification using CLARET.]
+systemName "Email"
+usecase "Log in User" {
+	actor emailUser "Email User"
+	preCondition "There is an active network connection"
+	basic {
+		step 1 emailUser "launches the login screen"
+		step 2 system "presents a form with username and password fields and a submit button"
+		step 3 emailUser "fills out the fields and click on the submit button"
+		step 4 system "displays a message" ef[1,2]
+	}
+	exception 1 "User does not exist in database" {
+		step 1 system "alerts that user does not exist"  bs 3
+	}
+	exception 2 "Incorrect password" {
+		step 1 system "alerts that the password is incorrect" bs 3
+	}
+	postCondition "User successfully logged"
+}
+\end{lstlisting} \label{specExample}
+
+From this specification, the following test suite can be generated: S1 = \{tc1, tc2, tc3\}, where tc1 = [bs:1 $\rightarrow$ bs:2 $\rightarrow$ bs:3 $\rightarrow$ bs:4], tc2 = [bs:1 $\rightarrow$ bs:2 $\rightarrow$ bs:3 $\rightarrow$ ef[1]:1 $\rightarrow$ bs:3 $\rightarrow$ bs:4], and tc3 = [bs:1 $\rightarrow$ bs:2 $\rightarrow$ bs:3 $\rightarrow$ ef[2]:1 $\rightarrow$ bs:3 $\rightarrow$ bs:4] .
+
+Suppose that in the following development cycle, the use case (Listing 1) was revisited and updated due to both requirement changes and for improving readability. Three edits were performed: (i) the message in line 9 was updated to ''displays a successful message``; (ii) system message in line 12 was updated to ``alerts that username does not exist''; and (iii) both description and system message in exception 3 (line 14) were updated to ''Incorrect  username/password  combination`` and ''alerts  that  username  and/or  password  are incorrect``, respectively. 
+
+Since steps from all execution flows were edited (basic, exception 1, and exception 2), Ann 
+%decides to, instead of first analyzing the impact of the changes in S1, 
+discards S1 and  generates a whole new suite. However, part of S1's tests were not much impacted and could be easily reused with little or no update. For instance, only edit (iii), in fact, changed the semantic of the use case, while (i) and (ii) are updates that do not interfere with the system's behavior. Therefore, only test cases that exercise the steps changed by (iii) should be in fact discarded (tc3). Moreover, test cases that exercise steps changed by (i) and/or (ii) could be easily reused and/or updated (tc1 and tc2). 
+
+We believe that an effective and automatic analyzer would help Ann to decide when to reuse and to discard test cases, and therefore reduce the burden of losing important testing data. 
