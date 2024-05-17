@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.9)  17 MAY 2024 01:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.9)  17 MAY 2024 02:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -320,18 +320,18 @@ Overfull \hbox (51.51488pt too wide) in paragraph at lines 64--65
  []
 
 [3]
-Overfull \hbox (51.51488pt too wide) in paragraph at lines 105--107
+Overfull \hbox (51.51488pt too wide) in paragraph at lines 105--106
 \OT1/cmr/m/n/12 mod-elo Para-met-ric [[]] e o mod-elo Con-cate-na-tiva [[]].
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 108.
+(Font)              <12> on input line 109.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 108.
+(Font)              <8> on input line 109.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 108.
+(Font)              <6> on input line 109.
 [4]
-Overfull \hbox (0.80983pt too wide) in paragraph at lines 146--147
+Overfull \hbox (0.80983pt too wide) in paragraph at lines 147--148
 \OT1/cmr/m/n/12 Alguns dos es-tu-dos se-le-ciona-dos est~ao con-ti-dos na se^^X
 c~ao de re-vis~ao sis-tem^^Satica
  []
@@ -377,7 +377,7 @@ ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/t
 homa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C
 :/Users/thoma/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt
 12.pfb>
-Output written on v1_fpcc1.pdf (6 pages, 164921 bytes).
+Output written on v1_fpcc1.pdf (6 pages, 164752 bytes).
 PDF statistics:
  167 PDF objects out of 1000 (max. 8388607)
  29 named destinations out of 1000 (max. 500000)
