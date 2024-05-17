@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{7}
+\begin{thebibliography}{8}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -104,6 +104,19 @@
 \newblock
 \newblock
 \showeprint[arxiv]{1609.03499}~[cs.SD]
+
+
+\bibitem[(WAI)(2024)]%
+        {WAI_2024_guidlines_for_accessibility}
+\bibfield{author}{\bibinfo{person}{W3C Web Accessibility~Initiative (WAI)}.}
+  \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Text to speech}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.w3.org/WAI/perspective-videos/speech/}
+\showURL{%
+\tempurl}
 
 
 \bibitem[Wood et~al\mbox{.}(2017)]%

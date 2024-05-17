@@ -8,7 +8,6 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Database file #1: ref.bib
-Warning--I didn't find a database entry for ""
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Warning--no key, author in falabrasil
 Warning--no author, editor, organization, or key in falabrasil
@@ -25,45 +24,45 @@ Warning--empty year in falabrasil
 Warning--empty booktitle in rosa2021ttsptbr
 Warning--empty publisher in rosa2021ttsptbr
 Warning--empty address in rosa2021ttsptbr
-You've used 7 entries,
+You've used 8 entries,
             5981 wiz_defined-function locations,
-            1513 strings with 19533 characters,
-and the built_in function-call counts, 7450 in all, are:
-= -- 792
-> -- 371
+            1520 strings with 19745 characters,
+and the built_in function-call counts, 8165 in all, are:
+= -- 872
+> -- 388
 < -- 0
-+ -- 131
-- -- 128
-* -- 623
-:= -- 812
-add.period$ -- 31
-call.type$ -- 7
-change.case$ -- 71
-chr.to.int$ -- 7
-cite$ -- 22
-duplicate$ -- 579
-empty$ -- 403
-format.name$ -- 152
-if$ -- 1669
++ -- 135
+- -- 135
+* -- 660
+:= -- 890
+add.period$ -- 36
+call.type$ -- 8
+change.case$ -- 76
+chr.to.int$ -- 8
+cite$ -- 23
+duplicate$ -- 647
+empty$ -- 452
+format.name$ -- 159
+if$ -- 1826
 int.to.chr$ -- 2
 int.to.str$ -- 1
 missing$ -- 9
-newline$ -- 110
-num.names$ -- 43
-pop$ -- 277
+newline$ -- 122
+num.names$ -- 50
+pop$ -- 300
 preamble$ -- 1
-purify$ -- 119
+purify$ -- 132
 quote$ -- 0
-skip$ -- 240
+skip$ -- 269
 stack$ -- 0
-substring$ -- 390
-swap$ -- 58
+substring$ -- 441
+swap$ -- 62
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 191
+type$ -- 221
 warning$ -- 11
-while$ -- 23
+while$ -- 30
 width$ -- 0
-write$ -- 177
-(There were 12 warnings)
+write$ -- 199
+(There were 11 warnings)
