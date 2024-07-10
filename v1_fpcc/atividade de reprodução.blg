@@ -1,6 +1,6 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
-The top-level auxiliary file: v1_fpcc1.aux
+The top-level auxiliary file: atividade de reprodução.aux
 Reallocating 'name_of_file' (item size: 1) to 21 items.
 The style file: ACM-Reference-Format.bst
 Reallocating 'name_of_file' (item size: 1) to 4 items.
@@ -16,45 +16,45 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Warning--empty booktitle in rosa2021ttsptbr
 Warning--empty publisher in rosa2021ttsptbr
 Warning--empty address in rosa2021ttsptbr
-You've used 9 entries,
+You've used 1 entry,
             5981 wiz_defined-function locations,
-            1531 strings with 20208 characters,
-and the built_in function-call counts, 10169 in all, are:
-= -- 1160
-> -- 538
+            1478 strings with 18074 characters,
+and the built_in function-call counts, 1072 in all, are:
+= -- 93
+> -- 31
 < -- 0
-+ -- 188
-- -- 191
-* -- 853
-:= -- 1152
-add.period$ -- 43
-call.type$ -- 9
-change.case$ -- 97
-chr.to.int$ -- 9
-cite$ -- 12
-duplicate$ -- 750
-empty$ -- 521
-format.name$ -- 223
-if$ -- 2276
++ -- 11
+- -- 14
+* -- 63
+:= -- 110
+add.period$ -- 4
+call.type$ -- 1
+change.case$ -- 6
+chr.to.int$ -- 1
+cite$ -- 4
+duplicate$ -- 99
+empty$ -- 69
+format.name$ -- 18
+if$ -- 224
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 13
-newline$ -- 131
-num.names$ -- 64
-pop$ -- 303
+missing$ -- 5
+newline$ -- 50
+num.names$ -- 7
+pop$ -- 55
 preamble$ -- 1
-purify$ -- 165
+purify$ -- 14
 quote$ -- 0
-skip$ -- 316
+skip$ -- 36
 stack$ -- 0
-substring$ -- 574
-swap$ -- 74
+substring$ -- 52
+swap$ -- 3
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 237
+type$ -- 30
 warning$ -- 3
-while$ -- 42
+while$ -- 7
 width$ -- 0
-write$ -- 221
+write$ -- 58
 (There were 3 warnings)

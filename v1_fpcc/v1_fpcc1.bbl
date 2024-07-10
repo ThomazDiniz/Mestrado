@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{8}
+\begin{thebibliography}{9}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -37,17 +37,6 @@
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
 
-\bibitem[fal({[n.\,d.]})]%
-        {falabrasil}
- \bibinfo{year}{[n.\,d.]}\natexlab{}.
-\newblock
-\newblock
-\urldef\tempurl%
-\url{https://gitlab.com/fb-audio-corpora}
-\showURL{%
-\tempurl}
-
-
 \bibitem[Gonzalvo et~al\mbox{.}(2016)]%
         {goncalvo2016concatenative}
 \bibfield{editor}{\bibinfo{person}{Xavi Gonzalvo}, \bibinfo{person}{Siamak
@@ -62,6 +51,21 @@
 \url{http://www.isca-speech.org/archive/Interspeech_2016/pdfs/0264.PDF}
 \showURL{%
 \tempurl}
+
+
+\bibitem[Griffin and Lim(1984)]%
+        {Griffin84}
+\bibfield{author}{\bibinfo{person}{D. Griffin} {and} \bibinfo{person}{Jae
+  Lim}.} \bibinfo{year}{1984}\natexlab{}.
+\newblock \showarticletitle{Signal estimation from modified short-time Fourier
+  transform}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Acoustics, Speech, and
+  Signal Processing}} \bibinfo{volume}{32}, \bibinfo{number}{2}
+  (\bibinfo{year}{1984}), \bibinfo{pages}{236--243}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TASSP.1984.1164317}
+\showDOI{\tempurl}
 
 
 \bibitem[Rosa and Silva(2021)]%
@@ -117,6 +121,22 @@
 \url{https://www.w3.org/WAI/perspective-videos/speech/}
 \showURL{%
 \tempurl}
+
+
+\bibitem[Wang et~al\mbox{.}(2017)]%
+        {wang2017tacotron}
+\bibfield{author}{\bibinfo{person}{Yuxuan Wang}, \bibinfo{person}{RJ
+  Skerry-Ryan}, \bibinfo{person}{Daisy Stanton}, \bibinfo{person}{Yonghui Wu},
+  \bibinfo{person}{Ron~J. Weiss}, \bibinfo{person}{Navdeep Jaitly},
+  \bibinfo{person}{Zongheng Yang}, \bibinfo{person}{Ying Xiao},
+  \bibinfo{person}{Zhifeng Chen}, \bibinfo{person}{Samy Bengio},
+  \bibinfo{person}{Quoc Le}, \bibinfo{person}{Yannis Agiomyrgiannakis},
+  \bibinfo{person}{Rob Clark}, {and} \bibinfo{person}{Rif~A. Saurous}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Tacotron: Towards End-to-End Speech Synthesis}.
+\newblock
+\newblock
+\showeprint[arxiv]{1703.10135}~[cs.CL]
 
 
 \bibitem[Wood et~al\mbox{.}(2017)]%
