@@ -1,0 +1,176 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english, portuguese]{babel}
+\usepackage[usenames,dvipsnames]{color} %using the color package, not xcolor
+
+
+\title{\textbf{Análise e sugestões de formalismo para artigo com pouco ou nenhum formalismo - FPCC 3}}
+\author{Bruna Stefany}
+\date{Junho, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Sugestões de Formalismo}
+\subsection{Seção \textit{Data Collection}}
+\paragraph{}
+A seção de \textbf{Data Collection} é uma das seções mais defasadas com relação ao formalismo, mesmo sendo a que mais deveria apresentar o mesmo. Sendo assim, seguem as seguintes propostas de formalização.
+
+\subsubsection{Definição do período, conjunto de dados e tamanhos}
+\paragraph{}
+Nesta subseção do artigo, deveriam ter sido definidos os períodos em dias e a definição do set de dados construído.
+
+\paragraph{Original: }
+"Data from the Top 50 Global lists—a.k.a. rankings—were
+collected using Spotify’s Web API. The data were collected
+on a daily basis between November 2018 and April 2019."
+
+\paragraph{Sugestão: }
+"Data from the Top 50 Global lists—a.k.a. rankings—were
+collected using Spotify’s Web API. The data were collected
+on a daily basis between November 2018 and April 2019 \textcolor{blue} {\textit{(considering from 1st November to 30th April, \(daysPeriod = 180\)), creating a set composed by daily lists (each with \(size = 50\)) defined as \(DB=\{DL_{1},DL_{2},DL_{3},...,DL_{daysPeriod}\}\)}}. \textcolor{red}{Em inglês mês vem antes de dia. O correto é November 1st e April 30th.}
+
+\paragraph{}
+Neste caso, foram adicionadas as definições necessárias, identificações dos tamanhos dos conjuntos e período.
+
+\subsubsection{Utilização do som como dado principal, definição do mesmo e suas informações}
+\paragraph{}
+Cada linha dentro do set construído se refere a um som, portanto, o mesmo deveria ter sido definido, além de também indicar de forma mais direta a "aparência" de uma linha de informações relativa ao som.
+
+\paragraph{Original: }
+"For each daily list, we collected information from nine fields
+made available by the API. Namely, the entry’s rank, the
+ranking date, the artists names, the song title, the song release
+date, its duration in milliseconds, and a URL for the song’s
+30-second sample. Additionally, each entry has an “explicit”
+flag, which indicates whether the song contains profanity, and
+a popularity score, which is a value in the [0, 100] interval that
+reflects how popular the song was on that day."
+
+\paragraph{Sugestão: }
+"For each \textcolor{blue} {\textit{song = \(S \in DL_{i}\)}}, we collected information from nine fields made available by the API: 
+\[
+\textcolor{blue} {\textit{
+SInfo = [rank, date, artists\_names, title, release\_date, duration, URL, explicit, popularity]
+}}
+\]
+\textcolor{red}{Definição de Sinfo OK.}
+Namely, the entry’s rank, the
+ranking date, the artists names, the song title, the song release
+date, its duration in milliseconds, a URL for the song’s
+30-second sample,\textcolor{blue} {\textit{ explicit indicating whether the song contains profanity and  \(popularity \in [0, 100]\)}} that
+reflects how popular the song was on that day."
+
+\textcolor{red}{Sinto que faltou um pouco de explicação nas variáveis explicit e popularity. Sugestão: "Explicit indicating how much the song contains profanity and \(explicit) \in [0,100]\) where 0 indicates the song has no profanity and 100 the song contains profanity in every single line of the song; And  \(popularity) \in [0,100]\) indicating how much the song is popular where 0 is the song is no played at all and 100 the song is played by all of our base." Acho que uma explicação mais completa poderia adicionar ao artigo original também.}
+
+\paragraph{}
+Nesta sugestão, foi definido um símbolo para o dado sonoro e a indicação de que o mesmo pertence ao conjunto de uma lista diária. Além disso, foi definida a linha criada com as informações da API e uma explicação mais concisa sobre os campos \textit{explicit} e \textit{popularity}
+
+\subsubsection{Definição das features adicionais e adição das mesmas ao conjunto de informações de cada dado sonoro}
+\paragraph{}
+Outro ponto que deveria ter sido definido era o conjunto de informações do som após a adição das \textit{acoustic features} ao set.
+
+\paragraph{Original: }
+"[...] For the remaining songs, we used the Python package LibROSA to extract five acoustic features, namely Mel-Frequency Cepstral Coefficients (MFCC), spectral centroid, spectral flatness, zero crossings, and tempo. We chose this specific set of features because they appeared frequently during our literature overview."
+
+\paragraph{Sugestão: }
+"[...] For the remaining songs, we used the Python package LibROSA to extract five acoustic features: 
+
+\[
+\textcolor{blue} {\textit{
+\(
+F_{S_{i}} = [MFCC, centroid, flatness, zero\_cross, tempo]
+\)
+}}
+\]
+\textcolor{blue} {\textit{
+Namely, Mel-Frequency Cepstral Coefficients (MFCC), spectral centroid, spectral flatness, zero crossings, and tempo. We chose this specific set of features because they appeared frequently during our literature overview.
+}}
+\textcolor{blue} {\textit{
+So, the final set of information for each sound was defined as follows:
+}}
+
+\textcolor{red}{OK, só adicionaria a definição destas variáveis para quem for leigo caso o artigo original não já tenha. Pessoalmente não sei o que é Mel-Frequency Cepstral Coefficients, spectral centroid, spectral Flatness nem zero crossing, consigo imaginar que são features de uma onda sonora na representação Mel Spectogram.}
+
+\[
+\textcolor{blue} {\textit{
+\begin{equation*}
+SInfo_{i} = SInfo_{i} + F_{i}
+\end{equation}
+}}
+\]
+
+\textcolor{red}{\(SInfo_{i}\) possui duas definições. Em uma situação como essas acho que seria melhor sinalizar como outra variável como \(SInfoEnriched_{i}\) para indicar que é uma versão enriquecida da variável da Sinfo.}
+
+\[
+\textcolor{blue} {\textit{
+\begin{equation*}
+SInfo_{i} = \begin{bmatrix}
+\text{rank}, & \text{date}, & \text{artists\_names}, & \text{title}, 
+& \text{release\_date},& \text{duration}, & \text{URL}, \\ \text{explicit}, & \text{popularity}, & \text{MFCC}, & \text{centroid}, & \text{flatness}, &
+\text{zero\_cross}, & \text{tempo}
+\end{bmatrix}
+\end{equation}
+}}"
+\]
+
+\paragraph{}
+Nesta sugestão, foi definido o formato dos dados de uma \textit{acoustic feature} de um som, a indicação de junção dos dois em um único set relativo ao som e a apresentação deste set após a junção.
+
+\subsection{Seção \textit{Instance extraction}}
+\subsubsection{Definir a representatividade dos símbolos desde o primeiro momento de utilização}
+\paragraph{}
+Ao invés de apresentar \(\delta\) e \(k\) como lag period e lagged features em \textbf{C. Training and Prediction}:
+\paragraph{C. Training and Prediction - Original: }
+"For our experiments, we defined the lag period to be \(\delta\)=20
+days and the number of lagged features to be \(k=3\)."
+\paragraph{}
+Apresentar em \textbf{B. Instance extraction}, onde \(\delta\) e \(k\) aparecem primeiro, desta forma já se é possível entender desde o início.
+\paragraph{B. Instance extraction - Sugestão: }
+"[...] The last feature added to each instance is the target value,
+which is a binary variable that indicates whether a song is
+popular \((k + 1)\delta\) days after the date of the first instance, \textcolor{blue} {\textit{where \(\delta\) is the lag period and \(k\) is the number of lagged features. }}
+For
+example, if we define \(\delta=30\) and \(k=4\), then for each instance
+the target will be its popularity status five months into the
+future.
+"
+
+\subsubsection{Atribuição da equação a uma função para reutilizar}
+
+A equação \((k + 1)\delta\) é utilizada em mais de uma seção diretamente. A mesma poderia ter sido atribuída a uma função para reutilizar.
+
+\paragraph{Original: }
+"[...] The last feature added to each instance is the target value,
+which is a binary variable that indicates whether a song is
+popular \((k + 1)\delta\) days after the date of the first instance. For example, if we define \(\delta\)=30 and k=4, then for each instance
+the target will be its popularity status five months into the
+future."
+
+\paragraph{Sugestão: }
+"[...] The last feature added to each instance is the target value,
+which is a binary variable that indicates whether a song is
+popular \textcolor{blue} {\textit{ \( daysEstimated(k, \delta)\) }} after the date of the first instance.\textcolor{blue} {\textit{ Defining \( daysEstimated(k, \delta) = ((k + 1)\delta) \)}}.
+
+For
+example, if we define \(\delta\)=30 and \(k\)=4, then for each instance
+the target will be its popularity status five months into the
+future.
+"
+\\
+\\
+Sendo assim, na seção \textbf{C. Training and Prediction}, poderia ser reutilizada a função:
+
+
+\paragraph{C. Training and Prediction - Sugestão: }
+"For our experiments, we defined \textcolor{blue} {\textit{\(\delta\)=20 \(k\)=3}}.[...] Each instance is lagged with popularity information from the next 60 days and is labeled according to the
+popularity of each song \textcolor{blue} {\textit{\( daysEstimated(k, \delta)= 80\)}} days later[...]"
+
+\textcolor{red}{A definição a priori  de (k+1)\(\delta\) de fato deixa a interpretação mais clara e direta, mas acho que a definição da função algo desnecessário pois pode reduzir o entendimento do cálculo em si da função. Acho que seguir com (k+1)\(\delta\) uma maneira de demonstrar diretamente o cálculo como melhor do que a opção de utilizar uma função.}
+
+\end{document}
+
+
